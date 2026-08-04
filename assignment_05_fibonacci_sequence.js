@@ -54,4 +54,75 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+const readlineSync = require('readline-sync');
+
+function generateFibonacciTerms(n) {
+  const sequence = [];
+
+  if (n <= 0) {
+    return sequence;
+  }
+
+  let a = 0;
+  let b = 1;
+
+  for (let i = 0; i < n; i++) {
+    sequence.push(a);
+    const next = a + b;
+    a = b;
+    b = next;
+  }
+
+  return sequence;
+}
+
+function isFibonacciNumber(number) {
+  if (number < 0) {
+    return false;
+  }
+
+  let a = 0;
+  let b = 1;
+
+  while (a <= number) {
+    if (a === number) {
+      return true;
+    }
+
+    const next = a + b;
+    a = b;
+    b = next;
+  }
+
+  return false;
+}
+
+function main() {
+  console.log('1. Print first N Fibonacci terms');
+  console.log('2. Check whether a number is Fibonacci');
+  const choice = readlineSync.questionInt('Enter your choice (1-2): ');
+
+  if (choice === 1) {
+    const n = readlineSync.questionInt('How many terms? ');
+    if (n <= 0) {
+      console.log('Error: N must be a positive integer.');
+      return;
+    }
+
+    const sequence = generateFibonacciTerms(n);
+    console.log(`Fibonacci sequence: ${sequence.join(' ')}`);
+  } else if (choice === 2) {
+    const number = readlineSync.questionInt('Enter a number to check: ');
+    if (isFibonacciNumber(number)) {
+      console.log(`${number} is a Fibonacci number.`);
+    } else {
+      console.log(`${number} is NOT a Fibonacci number.`);
+    }
+  } else {
+    console.log('Invalid choice.');
+  }
+}
+
+main();
+
 
